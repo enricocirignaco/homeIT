@@ -1,6 +1,6 @@
 #!/bin/bash
 bin=./bin
-media_pool=./media_in
+media_pool=./media
 converted_tag=_converted # must also be manually changed in convert_command
 
 # put all non video files recursively in bin folder
