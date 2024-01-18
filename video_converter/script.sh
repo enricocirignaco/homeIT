@@ -4,6 +4,7 @@
 mkdir -p $BIN
 # put all non video files recursively in the bin folder
 find $MEDIA_POOL -type f \
+  -not -path "*/@eaDir/*" \
   -exec bash -c 'file -b --mime-type "$0" | grep -qvE "^video/"' {} \; \
   -exec mv -t $BIN {} +
 
@@ -22,6 +23,11 @@ while IFS= read -r -d '' file; do
         break
     fi
 
+    # Skip files inside @eaDir directories
+    if [[ "$file" == *"@eaDir"* ]]; then
+        continue
+    fi
+    
     #Convert the file
     input="$file"
     output="${input%.*}_${CONVERTED_TAG}.mp4"
